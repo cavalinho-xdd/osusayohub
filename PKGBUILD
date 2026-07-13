@@ -4,7 +4,7 @@ pkgver=0.1.0
 pkgrel=7
 pkgdesc="osu!lazer overlay (live PP, hit-error/UR meter) and SayoDevice O3C configuration hub"
 arch=('any')
-url="https://github.com/dzejkop/osusayohub"
+url="https://github.com/cavalinho-xdd/osusayohub"
 license=('MIT')
 depends=(
   'python'
