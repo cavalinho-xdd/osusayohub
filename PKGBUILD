@@ -1,11 +1,13 @@
 # Maintainer: dzejkop <jakub.muzik07@gmail.com>
-pkgname=osusayohub
-pkgver=0.3.0
+pkgname=ppeek
+pkgver=0.4.0
 pkgrel=1
 pkgdesc="osu!lazer overlay: live PP, hit-error/UR meter, KPS"
 arch=('any')
-url="https://github.com/cavalinho-xdd/osusayohub"
+url="https://github.com/cavalinho-xdd/ppeek"
 license=('MIT')
+conflicts=('osusayohub')
+replaces=('osusayohub')
 depends=(
   'python'
   'python-pyqt6'
@@ -31,10 +33,10 @@ build() {
 
 package() {
   python -m installer --destdir="$pkgdir" "$srcdir"/dist/*.whl
-  install -Dm644 "$startdir/packaging/osusayohub.desktop" \
-    "$pkgdir/usr/share/applications/osusayohub.desktop"
-  install -Dm644 "$startdir/packaging/osusayohub.svg" \
-    "$pkgdir/usr/share/icons/hicolor/scalable/apps/osusayohub.svg"
-  install -Dm644 "$startdir/packaging/99-osusayohub.rules" \
-    "$pkgdir/usr/lib/udev/rules.d/99-osusayohub.rules"
+  install -Dm644 "$startdir/packaging/ppeek.desktop" \
+    "$pkgdir/usr/share/applications/ppeek.desktop"
+  install -Dm644 "$startdir/packaging/ppeek.svg" \
+    "$pkgdir/usr/share/icons/hicolor/scalable/apps/ppeek.svg"
+  install -Dm644 "$startdir/packaging/99-ppeek.rules" \
+    "$pkgdir/usr/lib/udev/rules.d/99-ppeek.rules"
 }

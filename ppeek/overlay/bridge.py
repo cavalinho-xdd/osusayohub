@@ -6,8 +6,8 @@ import time
 from PyQt6.QtCore import QObject, QTimer, pyqtProperty, pyqtSignal
 from PyQt6.QtGui import QColor
 
-from osusayohub.osu.telemetry import TelemetryFrame
-from osusayohub.overlay.theme import DEFAULT_THEME, resolve_theme
+from ppeek.osu.telemetry import TelemetryFrame
+from ppeek.overlay.theme import DEFAULT_THEME, resolve_theme
 
 
 def _hex(color: QColor) -> str:

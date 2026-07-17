@@ -26,7 +26,7 @@ from PyQt6.QtGui import (
 )
 from PyQt6.QtWidgets import QGridLayout, QScrollArea, QVBoxLayout, QWidget
 
-from osusayohub.overlay.theme import OverlayTheme, resolve_theme
+from ppeek.overlay.theme import OverlayTheme, resolve_theme
 
 
 @dataclass(frozen=True)
@@ -212,7 +212,7 @@ class SkinShowcase(QScrollArea):
     def _render_previews(self) -> None:
         # imported here so the main process only pays for the overlay
         # machinery once the Skins tab is actually opened
-        from osusayohub.overlay.preview import render_theme_preview
+        from ppeek.overlay.preview import render_theme_preview
 
         for card in self._cards:
             img = render_theme_preview(card.entry.skin_name, card.entry.anim_t)

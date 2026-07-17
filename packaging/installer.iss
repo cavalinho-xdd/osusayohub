@@ -1,8 +1,8 @@
-#define MyAppName "OsuSayoHub"
-#define MyAppVersion "0.3.0"
+#define MyAppName "PPeek"
+#define MyAppVersion "0.4.0"
 #define MyAppPublisher "cavalinho-xdd"
-#define MyAppURL "https://github.com/cavalinho-xdd/osusayohub"
-#define MyAppExeName "OsuSayoHub.exe"
+#define MyAppURL "https://github.com/cavalinho-xdd/ppeek"
+#define MyAppExeName "PPeek.exe"
 
 [Setup]
 ; App info
@@ -16,7 +16,10 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={localappdata}\Programs\{#MyAppName}
 ; Set output dir and file name
 OutputDir=..\dist
-OutputBaseFilename=OsuSayoHub-Installer
+OutputBaseFilename=PPeek-Installer
+; Installer wizard + Add/Remove Programs icon
+SetupIconFile=ppeek.ico
+UninstallDisplayIcon={app}\{#MyAppExeName}
 ; We don't want to ask for admin privileges
 PrivilegesRequired=lowest
 Compression=lzma2/max
@@ -33,8 +36,8 @@ Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\dist\OsuSayoHub\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\dist\OsuSayoHub\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "..\dist\PPeek\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\dist\PPeek\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

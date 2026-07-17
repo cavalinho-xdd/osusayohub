@@ -22,10 +22,11 @@ jobs:
 
       - name: Build
         run: >
-          pyinstaller --noconfirm --onedir --windowed --name OsuSayoHub
-          --add-data "osusayohub/overlay/Overlay.qml;osusayohub/overlay"
-          --add-data "osusayohub/assets;osusayohub/assets"
-          --add-data "packaging/osusayohub.svg;packaging"
+          pyinstaller --noconfirm --onedir --windowed --name PPeek
+          --icon packaging/ppeek.ico
+          --add-data "ppeek/overlay/Overlay.qml;ppeek/overlay"
+          --add-data "ppeek/assets;ppeek/assets"
+          --add-data "packaging/ppeek.svg;packaging"
           --hidden-import PyQt6.QtSvg
           --exclude-module PyQt6.QtQml
           --exclude-module PyQt6.QtQuick
@@ -34,16 +35,16 @@ jobs:
       - name: Smoke test
         run: |
           $env:QT_QPA_PLATFORM = "offscreen"
-          $p = Start-Process -FilePath dist\OsuSayoHub\OsuSayoHub.exe -PassThru
+          $p = Start-Process -FilePath dist\PPeek\PPeek.exe -PassThru
           Start-Sleep -Seconds 12
           if ($p.HasExited) {
             Write-Host "app exited early with code $($p.ExitCode)"
-            Get-ChildItem "$env:LOCALAPPDATA\OsuSayoHub" -ErrorAction SilentlyContinue |
+            Get-ChildItem "$env:LOCALAPPDATA\PPeek" -ErrorAction SilentlyContinue |
               ForEach-Object { Write-Host "--- $($_.Name)"; Get-Content $_.FullName }
             exit 1
           }
-          Get-Process OsuSayoHub -ErrorAction SilentlyContinue | Stop-Process -Force
-          Get-ChildItem "$env:LOCALAPPDATA\OsuSayoHub" -ErrorAction SilentlyContinue |
+          Get-Process PPeek -ErrorAction SilentlyContinue | Stop-Process -Force
+          Get-ChildItem "$env:LOCALAPPDATA\PPeek" -ErrorAction SilentlyContinue |
             ForEach-Object { Write-Host "--- $($_.Name)"; Get-Content $_.FullName }
 
       - name: Bundle tosu
@@ -53,28 +54,28 @@ jobs:
           gh release download --repo tosuapp/tosu --pattern "*windows*.zip" --output tosu.zip
           Expand-Archive tosu.zip -DestinationPath tosu-unpacked
           $exe = Get-ChildItem tosu-unpacked -Recurse -Filter tosu.exe | Select-Object -First 1
-          Copy-Item $exe.FullName dist/OsuSayoHub/tosu.exe
+          Copy-Item $exe.FullName dist/PPeek/tosu.exe
 
       - name: Build Installer
         run: iscc packaging\installer.iss
 
       - name: Zip
-        run: Compress-Archive -Path dist/OsuSayoHub -DestinationPath OsuSayoHub-windows.zip
+        run: Compress-Archive -Path dist/PPeek -DestinationPath PPeek-windows.zip
 
       - uses: actions/upload-artifact@v4
         with:
-          name: OsuSayoHub-windows
-          path: OsuSayoHub-windows.zip
+          name: PPeek-windows
+          path: PPeek-windows.zip
 
       - uses: actions/upload-artifact@v4
         with:
-          name: OsuSayoHub-Installer
-          path: dist/OsuSayoHub-Installer.exe
+          name: PPeek-Installer
+          path: dist/PPeek-Installer.exe
 
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            OsuSayoHub-windows.zip
-            dist/OsuSayoHub-Installer.exe
+            PPeek-windows.zip
+            dist/PPeek-Installer.exe

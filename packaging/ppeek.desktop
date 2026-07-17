@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=PPeek
+Comment=osu!lazer overlay — live PP, hit-error/UR meter, KPS
+Exec=ppeek
+Icon=ppeek
+Terminal=false
+Categories=Game;Utility;
+Keywords=osu;overlay;pp;

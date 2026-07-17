@@ -1,4 +1,4 @@
-# osu!SayoHub
+# PPeek
 
 **Live PP overlay for [osu!lazer](https://osu.ppy.sh) — hit-error meter, UR, combo, accuracy and KPS, with skin-driven themes. Windows & Linux.**
 
@@ -42,21 +42,21 @@ The overlay reads the **active skin name from osu!lazer** (via tosu) and switche
 | clearBlack | True black with rainbow-ring crosshair hitcircles looping their approach circles, drifting blue-violet cursor glow |
 | anything else | Falls back to the ink theme |
 
-Everything is painted procedurally — no image assets, just code. Adding a theme for your skin is a single palette entry in [`osusayohub/overlay/theme.py`](osusayohub/overlay/theme.py).
+Everything is painted procedurally — no image assets, just code. Adding a theme for your skin is a single palette entry in [`ppeek/overlay/theme.py`](ppeek/overlay/theme.py).
 
 ## 🚀 Getting started
 
 ### Windows 10 / 11
 
-1. Download `OsuSayoHub-windows.zip` from the [latest release](../../releases/latest)
-2. Unzip anywhere and run `OsuSayoHub.exe` (tosu is bundled and started automatically)
+1. Download `PPeek-windows.zip` from the [latest release](../../releases/latest)
+2. Unzip anywhere and run `PPeek.exe` (tosu is bundled and started automatically)
 3. Start osu!lazer in **borderless / windowed fullscreen** — no overlay software can draw over exclusive fullscreen
 4. The tray icon turns green when everything is attached; the overlay appears when you start a beatmap
 
 ### Arch Linux
 ```sh
-git clone https://github.com/cavalinho-xdd/osusayohub.git
-cd osusayohub
+git clone https://github.com/cavalinho-xdd/ppeek.git
+cd ppeek
 makepkg -si
 ```
 
@@ -65,7 +65,7 @@ On Wayland with `layer-shell-qt` the overlay renders on the wlr-layer-shell over
 ### Anywhere else
 ```sh
 pip install .
-osusayohub
+ppeek
 ```
 
 ## 🧩 How it works

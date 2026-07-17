@@ -1,4 +1,4 @@
-from osusayohub.core.app import run
+from ppeek.core.app import run
 
 if __name__ == "__main__":
     run()

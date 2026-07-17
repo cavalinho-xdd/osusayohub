@@ -22,7 +22,7 @@ def _setup_logging() -> None:
     if getattr(sys, "frozen", False):
         # windowed exe has no stdout/stderr — StreamHandler would silently
         # drop everything, so log to a file per process role instead
-        logdir = Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "OsuSayoHub"
+        logdir = Path(os.environ.get("LOCALAPPDATA", str(Path.home()))) / "PPeek"
         logdir.mkdir(parents=True, exist_ok=True)
         name = "overlay.log" if "--overlay" in sys.argv else "main.log"
         logging.basicConfig(
@@ -36,6 +36,20 @@ def _setup_logging() -> None:
 
 _setup_logging()
 logger = logging.getLogger(__name__)
+
+
+def _migrate_legacy_settings() -> None:
+    """One-time copy of pre-rename settings (osusayohub -> ppeek)."""
+    from PyQt6.QtCore import QSettings
+
+    new_path = Path(QSettings(
+        QSettings.Format.IniFormat, QSettings.Scope.UserScope, "ppeek", "ppeek"
+    ).fileName())
+    old_path = new_path.parent.parent / "osusayohub" / "osusayohub.ini"
+    if old_path.exists() and not new_path.exists():
+        new_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(old_path, new_path)
+        logger.info("migrated settings from %s", old_path)
 
 if sys.platform == "win32":
     _OSU_NAMES = {"osu!.exe"}
@@ -185,17 +199,17 @@ async def _tosu_supervisor(on_status=None) -> None:
 def _spawn_overlay() -> subprocess.Popen:
     if getattr(sys, "frozen", False):
         return subprocess.Popen([sys.executable, "--overlay"])
-    return subprocess.Popen([sys.executable, "-m", "osusayohub", "--overlay"])
+    return subprocess.Popen([sys.executable, "-m", "ppeek", "--overlay"])
 
 
 def _base_icon():
     from PyQt6.QtGui import QIcon
 
-    icon = QIcon.fromTheme("osusayohub")
+    icon = QIcon.fromTheme("ppeek")
     if not icon.isNull():
         return icon
     # frozen bundle or dev checkout: load straight from packaged assets
-    svg = _resource_dir() / "packaging" / "osusayohub.svg"
+    svg = _resource_dir() / "packaging" / "ppeek.svg"
     return QIcon(str(svg))
 
 
@@ -221,7 +235,7 @@ def _status_icon(base, color: str):
 
 def run() -> None:
     if "--overlay" in sys.argv:
-        from osusayohub.overlay.main import run_overlay
+        from ppeek.overlay.main import run_overlay
 
         run_overlay()
         return
@@ -230,18 +244,19 @@ def run() -> None:
     from PyQt6.QtCore import QSettings
     from PyQt6.QtWidgets import QApplication, QMenu, QSystemTrayIcon
 
-    from osusayohub.confighub.window import SettingsWindow
-    from osusayohub.input.tracker import list_keyboards
+    from ppeek.confighub.window import SettingsWindow
+    from ppeek.input.tracker import list_keyboards
 
     app = QApplication(sys.argv)
-    app.setApplicationName("OsuSayoHub")
+    app.setApplicationName("PPeek")
     # closing the settings window minimizes to tray; Quit lives in the tray menu
     app.setQuitOnLastWindowClosed(False)
 
     loop = qasync.QEventLoop(app)
     asyncio.set_event_loop(loop)
 
-    settings = QSettings(QSettings.Format.IniFormat, QSettings.Scope.UserScope, "osusayohub", "osusayohub")
+    _migrate_legacy_settings()
+    settings = QSettings(QSettings.Format.IniFormat, QSettings.Scope.UserScope, "ppeek", "ppeek")
 
     overlay_proc = _spawn_overlay()
 
@@ -279,9 +294,9 @@ def run() -> None:
         STATUS_RUNNING: _status_icon(base_icon, "#40c060"),
     }
     status_tooltips = {
-        STATUS_WAITING: "OsuSayoHub — waiting for osu!",
-        STATUS_ATTACHING: "OsuSayoHub — attaching tosu…",
-        STATUS_RUNNING: "OsuSayoHub — running",
+        STATUS_WAITING: "PPeek — waiting for osu!",
+        STATUS_ATTACHING: "PPeek — attaching tosu…",
+        STATUS_RUNNING: "PPeek — running",
     }
 
     def toggle_settings() -> None:

@@ -34,8 +34,8 @@ from PyQt6.QtGui import (
 )
 from PyQt6.QtWidgets import QWidget
 
-from osusayohub.osu.telemetry import GameState, TelemetryFrame
-from osusayohub.overlay.theme import DEFAULT_THEME, ensure_theme_fonts, resolve_theme
+from ppeek.osu.telemetry import GameState, TelemetryFrame
+from ppeek.overlay.theme import DEFAULT_THEME, ensure_theme_fonts, resolve_theme
 
 # hit-error meter windows as white intensity steps (approx. standard difficulty)
 _ERR_BANDS = [

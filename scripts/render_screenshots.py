@@ -1,6 +1,6 @@
 """Render README screenshots of the overlay without running the full app.
 
-Thin wrapper around osusayohub.overlay.preview: renders each theme's
+Thin wrapper around ppeek.overlay.preview: renders each theme's
 showcase preview offscreen and writes 2x-scaled transparent PNGs to
 docs/screenshots/.
 
@@ -19,9 +19,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from PyQt6.QtWidgets import QApplication
 
-from osusayohub.confighub.skins import SKIN_CATALOG
-from osusayohub.overlay.preview import render_theme_preview
-from osusayohub.overlay.theme import resolve_theme
+from ppeek.confighub.skins import SKIN_CATALOG
+from ppeek.overlay.preview import render_theme_preview
+from ppeek.overlay.theme import resolve_theme
 
 OUT_DIR = Path(__file__).resolve().parent.parent / "docs" / "screenshots"
 

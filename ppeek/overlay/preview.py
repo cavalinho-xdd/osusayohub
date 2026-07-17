@@ -16,8 +16,8 @@ import time
 
 from PyQt6.QtGui import QImage, QPainter
 
-from osusayohub.osu.telemetry import GameState, TelemetryFrame
-from osusayohub.overlay.window import OverlayWindow
+from ppeek.osu.telemetry import GameState, TelemetryFrame
+from ppeek.overlay.window import OverlayWindow
 
 DEMO_FRAME = TelemetryFrame(
     state=GameState.PLAY,

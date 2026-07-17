@@ -21,7 +21,7 @@ from PyQt6.QtWidgets import (
     QWidget,
 )
 
-from osusayohub.confighub.skins import SkinShowcase
+from ppeek.confighub.skins import SkinShowcase
 
 ANCHOR_LABELS = [
     ("Top left", "top-left"),
@@ -36,7 +36,7 @@ ANCHOR_LABELS = [
 class SettingsWindow(QWidget):
     def __init__(self, settings: QSettings):
         super().__init__()
-        self.setWindowTitle("OsuSayoHub Settings")
+        self.setWindowTitle("PPeek Settings")
         self.resize(720, 560)
         self._settings = settings
 

@@ -33,21 +33,21 @@ def run_overlay() -> None:
     from PyQt6.QtCore import QFileSystemWatcher, QSettings, QTimer
     from PyQt6.QtWidgets import QApplication
 
-    from osusayohub.input.tracker import (
+    from ppeek.input.tracker import (
         ClickTracker,
         calculate_unstable_rate,
         evdev_available,
     )
-    from osusayohub.osu.telemetry import PreciseListener, TelemetryListener
+    from ppeek.osu.telemetry import PreciseListener, TelemetryListener
 
     app = QApplication(sys.argv)
-    app.setApplicationName("osusayohub-overlay")
+    app.setApplicationName("ppeek-overlay")
     loop = qasync.QEventLoop(app)
     asyncio.set_event_loop(loop)
 
-    settings = QSettings(QSettings.Format.IniFormat, QSettings.Scope.UserScope, "osusayohub", "osusayohub")
+    settings = QSettings(QSettings.Format.IniFormat, QSettings.Scope.UserScope, "ppeek", "ppeek")
 
-    from osusayohub.overlay.bridge import HubState
+    from ppeek.overlay.bridge import HubState
 
     hub = HubState()
 
@@ -77,7 +77,7 @@ def run_overlay() -> None:
             logger.error("QML overlay failed to load, falling back to widget")
             use_layer_shell = False
     if not use_layer_shell:
-        from osusayohub.overlay.window import OverlayWindow
+        from ppeek.overlay.window import OverlayWindow
 
         window = OverlayWindow(auto_hide=settings.value("overlay/auto_hide", True, type=bool))
         read_layout()

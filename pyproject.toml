@@ -3,8 +3,8 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "osusayohub"
-version = "0.3.0"
+name = "ppeek"
+version = "0.4.0"
 description = "osu!lazer overlay: live PP, combo, accuracy, hit-error/UR meter, KPS"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -17,11 +17,11 @@ dependencies = [
 ]
 
 [project.gui-scripts]
-osusayohub = "osusayohub.core.app:run"
+ppeek = "ppeek.core.app:run"
 
 [tool.setuptools.packages.find]
-include = ["osusayohub*"]
+include = ["ppeek*"]
 
 [tool.setuptools.package-data]
-"osusayohub.overlay" = ["*.qml"]
-"osusayohub.assets" = ["fonts/*.ttf", "fonts/OFL*.txt"]
+"ppeek.overlay" = ["*.qml"]
+"ppeek.assets" = ["fonts/*.ttf", "fonts/OFL*.txt"]
