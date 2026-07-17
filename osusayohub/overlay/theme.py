@@ -52,6 +52,7 @@ FULL_MOON_NIGHT = OverlayTheme(
     bg_bottom=QColor(4, 4, 8, 235),
     accent=QColor(240, 240, 245),
     deco_red=QColor(235, 110, 110),
+    font="Gaegu",
 )
 
 # Arona & Plana (Blue Archive), by Kitazaki Hinata. Colors taken from the
