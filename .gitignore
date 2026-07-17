@@ -29,3 +29,4 @@ CODEBASE.md
 rewrite.sh
 rewrite_history.py
 commit.txt
+scripts/dev-theme.json
